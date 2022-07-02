@@ -8,10 +8,11 @@ const session = require('express-session');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
 
-const MsIdExpress = require('../../dist/index');
+const MsIdExpress = require('microsoft-identity-express');
 const appSettings = require('./appSettings');
 
 const router = require('./routes/router');
+const SERVER_PORT = process.env.PORT || 4000;
 
 const app = express();
 
@@ -20,7 +21,8 @@ const app = express();
  * and set the desired options. Visit: https://www.npmjs.com/package/express-session
  */
 app.use(session({
-    secret: 'ENTER_YOUR_SECRET_HERE',
+    secret: 'dfafafa',
+    key: 'express.sid',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -55,5 +57,7 @@ const msid = new MsIdExpress.WebAppAuthClientBuilder(appSettings).build();
 app.use(msid.initialize());
 
 app.use(router(msid));
+
+app.listen(SERVER_PORT, () => console.log(`Server is listening on port ${SERVER_PORT}!`));
 
 module.exports = app;
