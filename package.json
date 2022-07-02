@@ -5,8 +5,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "node app/app.js",
-    "dev": "node app/app.js"
+    "start": "node App/app.js",
+    "dev": "node App/app.js"
   },
   "author": "derisen",
   "license": "MIT",
